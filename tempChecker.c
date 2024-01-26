@@ -6,9 +6,10 @@
 #include <stdbool.h>
 #include <getopt.h>
 
-#define	OPTLIST		"vh"
+#define	OPTLIST		"dvh"
 
 bool verbose = false;
+bool dryRun = false;
 
 int temps(int numCores)
 {
@@ -52,17 +53,20 @@ int temps(int numCores)
 			check = 1;
 		}
 	}
-	if(check == 2)
+	if(!dryRun)
 	{
-		system("sudo ipmitool raw 0x3a 0x07 0x01 0xff 0x01 && sudo ipmitool raw 0x3a 0x07 0x02 0xff 0x01");
-	}
-	else if(check == 1)
-	{
-		system("sudo ipmitool raw 0x3a 0x07 0x01 0xff 0x00 &&  sudo ipmitool raw 0x3a 0x07 0x02 0xff 0x00");
-	}
-	else
-	{
-		system("sudo ipmitool raw 0x3a 0x07 0x02 0x27 0x01 && sudo ipmitool raw 0x3a 0x07 0x01 0x27 0x01");
+		if(check == 2)
+		{
+			system("sudo ipmitool raw 0x3a 0x07 0x01 0xff 0x01 && sudo ipmitool raw 0x3a 0x07 0x02 0xff 0x01");
+		}
+		else if(check == 1)
+		{
+			system("sudo ipmitool raw 0x3a 0x07 0x01 0xff 0x00 &&  sudo ipmitool raw 0x3a 0x07 0x02 0xff 0x00");
+		}
+		else
+		{
+			system("sudo ipmitool raw 0x3a 0x07 0x02 0x27 0x01 && sudo ipmitool raw 0x3a 0x07 0x01 0x27 0x01");
+		}
 	}
 	pclose(fp);
 	return check;
@@ -83,8 +87,13 @@ int main(int argc, char * argv[])
         }
 		else if(opt == 'h')
 		{
-			printf("Run with -v for verbose - otherwise give no arguments\n");
+			printf("Run with -v for verbose, or -d for a dry run - otherwise give no arguments\n");
 			exit(0);
+		}
+		else if(opt == 'd')
+		{
+			dryRun = true;
+			verbose = true;
 		}
 	}
 //	int numberOfCores = (atoi(argv[1]));
@@ -96,19 +105,27 @@ int main(int argc, char * argv[])
 	int temp = temps(numberOfCores);
 	if(verbose)
 	{
+		if(dryRun)
+		{
+			printf("Dry run, although I would have run: ");
+		}
+		else
+		{
+			printf("Ran ");
+		}
 		if(temp == 0)
 		{
-			printf("Ran 'sudo ipmitool raw 0x3a 0x07 0x02 0x27 0x01 && sudo ipmitool raw 0x3a 0x07 0x01 0x27 0x01'\n");
+			printf("'sudo ipmitool raw 0x3a 0x07 0x02 0x27 0x01 && sudo ipmitool raw 0x3a 0x07 0x01 0x27 0x01'\n");
 			printf("(lowest fan speed)\n");
 		}
 		else if(temp == 1)
 		{
-			printf("Ran 'sudo ipmitool raw 0x3a 0x07 0x01 0xff 0x00 &&  sudo ipmitool raw 0x3a 0x07 0x02 0xff 0x00'\n");
+			printf("'sudo ipmitool raw 0x3a 0x07 0x01 0xff 0x00 &&  sudo ipmitool raw 0x3a 0x07 0x02 0xff 0x00'\n");
 			printf("(medium fan speed)\n");
 		}
 		else if(temp == 0)
 		{
-			printf("Ran 'sudo ipmitool raw 0x3a 0x07 0x01 0xff 0x01 && sudo ipmitool raw 0x3a 0x07 0x02 0xff 0x01'\n");
+			printf("'sudo ipmitool raw 0x3a 0x07 0x01 0xff 0x01 && sudo ipmitool raw 0x3a 0x07 0x02 0xff 0x01'\n");
 			printf("(highest fan speed)\n");
 		}
 	}
