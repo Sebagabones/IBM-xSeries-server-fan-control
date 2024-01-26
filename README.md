@@ -6,6 +6,6 @@ You'll need gcc, ipmitools, and maybe a few other dependencies (as with last tim
 
 anyway, clone the repo, compile the tempChecker.c with gcc -o, and then add the path to the tempChecker executable to the systemd service, (and move the systemd file to `/etc/systemd/system/` then enable it and you *should* be good!
 
-there is a verbose mode and a dryrun mode if you really want - and this will work with different cpu's in theory
+there is a verbose mode and a dryrun mode if you really want (and a fan noise testing - see -h) - and this will work with different cpu's in theory
 
 good luck!
