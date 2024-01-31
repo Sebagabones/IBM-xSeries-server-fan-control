@@ -1,5 +1,5 @@
 there are sooo many bugs in this - don't use this yet
-~~~
+~~
 So! I had some free time and made a new version of my sketchy attempt at making my x3550 M4 be a bit less loud (although this current code is actually for an x3650 M4 - the process is pretty much the same - you may need to tweak this a little for other servers (I also may make custom modes - will see)
 
 anyway - this is much more user friendly - only two(!) files this time!
@@ -11,4 +11,4 @@ anyway, clone the repo, compile the tempChecker.c with gcc -o, and then add the 
 there is a verbose mode and a dryrun mode if you really want (and a fan noise testing - see -h) - and this will work with different cpu's in theory
 
 good luck!
-~~~
+~~
