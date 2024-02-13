@@ -4,8 +4,8 @@ After=network.target
 
 [Service]
 Type=simple
-WorkingDirectory=/PATH/TO/DIR/WITH/TEMPCHECKER
-ExecStart=PATH/TO/tempChecker
+WorkingDirectory=/home/bonesy/Storage/Software/IBM-xSeries-server-fan-control
+ExecStart=/home/bonesy/Storage/Software/IBM-xSeries-server-fan-control/tempChecker
 ExecReload=/bin/kill -HUP $MAINPID
 Restart=always
 RestartSec=2
@@ -14,7 +14,7 @@ StandardError=syslog
 SyslogIdentifier=fanServ
 User=root
 Group=root
-Environment=PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin:/PATH/TO/DIR/WITH/TEMPCHECKER
+Environment=PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin:/home/bonesy/Storage/Software/IBM-xSeries-server-fan-control
 
 [Install]
 WantedBy=multi-user.target
