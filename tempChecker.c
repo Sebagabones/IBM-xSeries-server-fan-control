@@ -13,7 +13,7 @@ bool dryRun = false;
 bool fanTest = false;
 int seconds = 5;
 int temps(int numCores)
-{
+{ 
 	FILE *fp;
 	char path[1035];
 	int coreTemps[numCores];
