@@ -116,7 +116,7 @@ int main(int argc, char * argv[])
 		    char fanspeed[2];
 			char command[100];
 		    printf("\n\n\033[31;1;4mTurning off fanServ.service - (this should turn back on automatically, but if you ctrl + C make sure to turn this back on)\033[0m\n\n");
-			system("sudo systemctl stop fanServ.service");
+//		    system("sudo systemctl stop fanServ.service");
 		    printf("Please enter fan speed (between 00 and ff) you want to test noise levels of (hexadecimal):\n");
 		    scanf("%s",&fanspeed);
 		    printf("fanspeed chosen is %s, testing: \n", fanspeed);
