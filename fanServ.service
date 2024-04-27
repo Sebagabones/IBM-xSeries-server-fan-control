@@ -17,7 +17,7 @@ StandardError=syslog
 SyslogIdentifier=fanServ
 User=root
 Group=root
-Environment=PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin:/home/bonesy/Storage/Software/IBM-xSeries-server-fan-control
+Environment=PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin:/PATH/TO/FANCONTROL/IBM-xSeries-server-fan-control
 
 [Install]
 WantedBy=multi-user.target
